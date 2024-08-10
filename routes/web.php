@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProfileController;
 // use CategoryController;
 
 /*
@@ -31,3 +32,6 @@ Route::post('/update/category/post', [CategoryController::class, 'updatecategory
 Route::get('/delete/{category_id}', [CategoryController::class, 'deletecategory']);
 Route::get('/restore/category/{category_id}', [CategoryController::class, 'restorecategory']);
 Route::get('/hard/delete/{category_id}', [CategoryController::class, 'harddeletecategory']);
+
+// Profile Controller Route
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
