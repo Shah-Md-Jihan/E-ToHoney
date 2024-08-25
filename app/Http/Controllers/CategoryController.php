@@ -6,9 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Carbon\Carbon;
 use Auth;
+use Image;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function addCategory(){
         $categories = Category::latest()->simplePaginate(5);
         $deleted_categories = Category::onlyTrashed()->latest()->simplePaginate(5);
@@ -17,17 +24,29 @@ class CategoryController extends Controller
 
     function categorypost(Request $request){
         $request->validate([
-            'category_name' => 'required|unique:categories,category_name'
+            'category_name' => 'required|unique:categories,category_name',
+            'category_photo' => 'required|image',
         ],
         [
             'category_name.required' => 'Please insert a category name!',
-            'category_name.unique' => 'The category name is already taken!'
+            'category_name.unique' => 'The category name is already taken!',
+            'category_photo.image' => 'Please select an image',
         ]);
 
-        Category::insert([
+        $category_id = Category::insertGetId([
             'category_name'=>$request->category_name,
+            'category_photo'=>'default.php',
             'admin_id'=>Auth::user()->id,
             'created_at'=>Carbon::now()
+        ]);
+
+        $uploaded_photo = $request->file('category_photo');
+        $category_photo_name = $category_id.'.'.$uploaded_photo->getClientOriginalExtension();
+        $category_photo_location = base_path('public/uploads/categories/'.$category_photo_name);
+        Image::make($uploaded_photo)->save($category_photo_location);
+
+        Category::find($category_id)->update([
+            'category_photo'=>$category_photo_name
         ]);
         
         return back()->with('category_add_message', 'Your Category Added Successfully!');

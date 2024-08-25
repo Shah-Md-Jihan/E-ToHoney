@@ -20,9 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['verified']);
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
 // Category controller routes 
 Route::get('/add/category', [CategoryController::class, 'addCategory'])->name('addcategory');
@@ -35,3 +36,5 @@ Route::get('/hard/delete/{category_id}', [CategoryController::class, 'harddelete
 
 // Profile Controller Route
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::post('/profile/post', [ProfileController::class, 'profilepost']);
+Route::post('/password/post', [ProfileController::class, 'passwordpost']);
