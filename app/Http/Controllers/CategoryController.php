@@ -54,7 +54,8 @@ class CategoryController extends Controller
 
     function updatecategory($category_id){
         $category_name = Category:: find($category_id)->category_name;
-        return view('admin.update_category', compact('category_name','category_id'));
+        $current_category_photo_name = Category::find($category_id)->category_photo;
+        return view('admin.update_category', compact('category_name','category_id','current_category_photo_name'));
     }
 
     function updatecategorypost(Request $request){
@@ -80,7 +81,10 @@ class CategoryController extends Controller
     }
 
     function harddeletecategory($category_id){
+
+        $category_category_photo_location = base_path('public/uploads/categories/'.Category::onlyTrashed()->find($category_id)->category_photo);
         Category::onlyTrashed()->find($category_id)->forceDelete();
+        unlink($category_category_photo_location);
         return back()->with('category_force_delete_status', 'Category permanently deleted!');
     }
 

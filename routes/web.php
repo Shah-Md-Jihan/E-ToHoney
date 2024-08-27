@@ -3,22 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
-// use CategoryController;
+use App\Http\Controllers\FrontendController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontendController::class, 'index']);
+
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 Auth::routes(['verify'=>true]);
 
@@ -38,3 +30,5 @@ Route::get('/hard/delete/{category_id}', [CategoryController::class, 'harddelete
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::post('/profile/post', [ProfileController::class, 'profilepost']);
 Route::post('/password/post', [ProfileController::class, 'passwordpost']);
+
+

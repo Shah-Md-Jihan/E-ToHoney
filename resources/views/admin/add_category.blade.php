@@ -1,11 +1,15 @@
 @extends('layouts.dashboard_master')
 
+@section('category')
+  active
+@endsection
+
 @section('content')
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
       <nav class="breadcrumb sl-breadcrumb">
-        <a class="breadcrumb-item" href="index.html">Starlight</a>
-        <span class="breadcrumb-item active">Dashboard</span>
+        <a class="breadcrumb-item" href="{{ url('home') }}">Dashboard</a>
+        <span class="breadcrumb-item active">Add Category</span>
       </nav>
 
       <div class="sl-pagebody">

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('category')
+    active
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -27,6 +31,14 @@
                           @error('category_name')
                               <span class="text-danger">{{ $message }}</span>
                           @enderror
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Current Category Photo</label>
+                          <img style="width: 120px;display:block;" src="{{ asset('uploads/categories') }}/{{ $current_category_photo_name }}" alt="">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Add New Category Photo</label>
+                          <input type="file" name="new_category_photo" class="form-control">
                         </div>
                         
                         <button type="submit" class="btn btn-warning">Update</button>
