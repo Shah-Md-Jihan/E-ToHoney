@@ -1,13 +1,22 @@
-@extends('layouts.app')
+@extends('layouts.dashboard_master')
 
 @section('category')
-    active
+  active
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+    <!-- ########## START: MAIN PANEL ########## -->
+    <div class="sl-mainpanel">
+      <nav class="breadcrumb sl-breadcrumb">
+        <a class="breadcrumb-item" href="{{ url('home') }}">Dashboard</a>
+        <span class="breadcrumb-item active">Add Category</span>
+      </nav>
+
+      <div class="sl-pagebody">
+
+        <div class="row row-sm">
+                   
+          <div class="col-md-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
@@ -39,6 +48,9 @@
                         <div class="mb-3">
                           <label class="form-label">Add New Category Photo</label>
                           <input type="file" name="new_category_photo" class="form-control">
+                          @error('new_category_photo')
+                              <span class="text-danger">{{ $message }}</span>
+                          @enderror
                         </div>
                         
                         <button type="submit" class="btn btn-warning">Update</button>
@@ -46,6 +58,10 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+                        
+        </div><!-- row -->
+
+      </div><!-- sl-pagebody -->
+
+@endsection  
+

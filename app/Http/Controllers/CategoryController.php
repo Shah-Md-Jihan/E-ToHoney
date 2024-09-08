@@ -60,9 +60,32 @@ class CategoryController extends Controller
 
     function updatecategorypost(Request $request){
         $updated_category_name = $request->category_name;
-        Category::find($request->category_id)->update([
-            'category_name' => $updated_category_name 
+        $request->validate([
+            'category_name' => 'required',
         ]);
+        if($request->hasFile('new_category_photo')){
+            $request->validate([
+                'new_category_photo' => 'required|image',
+            ]);
+            // old photo delete
+            $current_category_photo_location = base_path('public/uploads/categories/'.Category::find($request->category_id)->category_photo);
+            unlink($current_category_photo_location);
+            // new photo upload
+            $updated_category_photo = $request->file('new_category_photo');
+            $updated_category_photo_name = $request->category_id.'.'.$updated_category_photo->getClientOriginalExtension();
+            $updated_category_photo_location = base_path('public/uploads/categories/'.$updated_category_photo_name);
+            Image::make($updated_category_photo)->save($updated_category_photo_location);
+
+            Category::find($request->category_id)->update([
+                'category_name' => $updated_category_name,
+                'category_photo'=>$updated_category_photo_name
+            ]);
+        }
+        else{
+            Category::find($request->category_id)->update([
+                'category_name' => $updated_category_name,
+            ]);
+        }
 
         return redirect('add/category')->with('category_update_message', 'Category updated successfully');
     }
