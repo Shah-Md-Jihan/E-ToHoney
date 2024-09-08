@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ProductsController;
 
 
 Route::get('/', [FrontendController::class, 'index']);
@@ -32,3 +33,5 @@ Route::post('/profile/post', [ProfileController::class, 'profilepost']);
 Route::post('/password/post', [ProfileController::class, 'passwordpost']);
 
 
+// ProductsController Routes
+Route::get('/products', [ProductsController::class, 'products']);
