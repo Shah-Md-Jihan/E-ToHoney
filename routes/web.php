@@ -8,10 +8,7 @@ use App\Http\Controllers\ProductsController;
 
 
 Route::get('/', [FrontendController::class, 'index']);
-
-// Route::get('/', function () {
-//     return view('index');
-// });
+Route::get('/product/details/{product_id}', [FrontendController::class, 'productdetail']);
 
 Auth::routes(['verify'=>true]);
 
@@ -35,3 +32,5 @@ Route::post('/password/post', [ProfileController::class, 'passwordpost']);
 
 // ProductsController Routes
 Route::get('/products', [ProductsController::class, 'products']);
+Route::get('add/products', [ProductsController::class, 'addproducts']);
+Route::post('add/products/post', [ProductsController::class, 'addproductspost']);
