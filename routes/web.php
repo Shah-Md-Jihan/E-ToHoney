@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ShopController;
 
 
 Route::get('/', [FrontendController::class, 'index']);
@@ -34,3 +35,7 @@ Route::post('/password/post', [ProfileController::class, 'passwordpost']);
 Route::get('/products', [ProductsController::class, 'products']);
 Route::get('add/products', [ProductsController::class, 'addproducts']);
 Route::post('add/products/post', [ProductsController::class, 'addproductspost']);
+
+
+// ShopController Routes
+Route::get('/shop', [ShopController::class, 'shop']);
