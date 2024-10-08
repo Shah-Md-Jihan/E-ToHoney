@@ -77,8 +77,8 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ url('products') }}" class="nav-link">Products List</a></li>
-          <li class="nav-item"><a href="{{ url('add/products') }}" class="nav-link">Add Products</a></li>
+          <li class="nav-item"><a href="{{ url('products') }}" class="nav-link @yield('product_list')">Products List</a></li>
+          <li class="nav-item"><a href="{{ url('add/products') }}" class="nav-link @yield('add_product')">Add Products</a></li>
         </ul>
 
         <a href="" class="sl-menu-link">

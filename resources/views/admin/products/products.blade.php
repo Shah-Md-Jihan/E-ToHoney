@@ -3,6 +3,9 @@
 @section('products')
   active
 @endsection
+@section('product_list')
+  active
+@endsection
 
 @section('content')
     <!-- ########## START: MAIN PANEL ########## -->

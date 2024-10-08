@@ -3,6 +3,9 @@
 @section('products')
   active
 @endsection
+@section('add_product')
+  active
+@endsection
 
 @section('content')
     <!-- ########## START: MAIN PANEL ########## -->
@@ -79,7 +82,10 @@
                                     <div class="mb-3">
                                       <label class="form-label">Thumbnail Photo</label>
                                       <input type="file" name="thumbnail_photo" class="form-control">  
-                                      
+                                    </div>
+                                    <div class="mb-3">
+                                      <label class="form-label">Multiple Photo</label>
+                                      <input type="file" name="multiple_photo[]" class="form-control" multiple>  
                                     </div>
                                     
                                     <button type="submit" class="btn btn-success">Submit</button>
