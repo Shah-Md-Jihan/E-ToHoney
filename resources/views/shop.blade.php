@@ -50,8 +50,23 @@
                                     <div class="product-icon flex-style">
                                         <ul>
                                             <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
+                                            <li>
+                                                <form action="{{ url('add/to/wishlist') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    <button type="submit" class="@if(App\Models\Wishlist::where('product_id', $product->id)->where('ip_address', request()->ip())->exists()) d-none @endif">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <form action="{{ url('add/to/cart') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    <input type="hidden" name="quantity" value="1" />
+                                                    <button type="submit"><i class="fa fa-shopping-bag"></i></button>
+                                                </form>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -85,8 +100,25 @@
                                     <div class="product-icon flex-style">
                                         <ul>
                                             <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
+                                            
+                                            <li>
+                                                <form action="{{ url('add/to/wishlist') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                                    <button type="submit" class="@if(App\Models\Wishlist::where('product_id', $item->id)->where('ip_address', request()->ip())->exists()) d-none @endif">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                            
+                                            <li>
+                                                <form action="{{ url('add/to/cart') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                                    <input type="hidden" name="quantity" value="1" />
+                                                    <button type="submit"><i class="fa fa-shopping-bag"></i></button>
+                                                </form>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

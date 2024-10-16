@@ -119,75 +119,67 @@
                         <ul class="search-cart-wrapper d-flex">
                             <li class="search-tigger"><a href="javascript:void(0);"><i class="flaticon-search"></i></a></li>
                             <li>
-                                <a href="javascript:void(0);"><i class="flaticon-like"></i> <span>2</span></a>
+                                <a href="javascript:void(0);"><i class="flaticon-like"></i> <span>{{ App\Models\Wishlist::where('ip_address', request()->ip())->count() }}</span></a>
                                 <ul class="cart-wrap dropdown_style">
+                                    @php
+                                        $wishlist_subtotal = 0;
+                                    @endphp
+                                    @forelse (App\Models\Wishlist::where('ip_address', request()->ip())->get() as $wishlist)
                                     <li class="cart-items">
                                         <div class="cart-img">
-                                            <img src="assets/images/cart/1.jpg" alt="">
+                                            <img width="50px" src="{{ asset('uploads/products') }}/{{ $wishlist->connectionwithproduct->thumbnail_photo }}" alt="">
                                         </div>
                                         <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
+                                            <a href="cart.html">{{ Str::limit($wishlist->connectionwithproduct->title, 12) }}</a>
+                                            <p>৳{{ $wishlist->connectionwithproduct->price }}</p>
                                             <i class="fa fa-times"></i>
                                         </div>
                                     </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
+                                    
+                                    @php
+                                        $wishlist_subtotal = $wishlist_subtotal + $wishlist->connectionwithproduct->price;
+                                    @endphp
+
+                                    @empty
+                                        <li><span class="text-white cart-items">No Products On Wishlist<span><li>
+                                    @endforelse
+                                    
+                                    
+                                    <li>Subtotol: <span class="pull-right">৳{{ $wishlist_subtotal }}</span></li>
                                     <li>
-                                        <button>Check Out</button>
+                                        <a href="{{ url('view/wishlist') }}" class="wish_btn">View Wishlist</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>3</span></a>
+                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> 
+                                    <span>{{ App\Models\Cart::where('ip_address', request()->ip())->count(); }}</span>
+                                </a>
                                 <ul class="cart-wrap dropdown_style">
+                                    @php
+                                        $subtotal = 0;
+                                    @endphp
+                                    @foreach (App\Models\Cart::where('ip_address', request()->ip())->get() as $cart_item)
                                     <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/1.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/2.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
+                                            <div class="cart-img">
+                                                <img width="50px" src="{{ asset('uploads/products') }}/{{ App\Models\Product:: find($cart_item->product_id)->thumbnail_photo }}" alt="">
+                                            </div>
+                                            <div class="cart-content">
+                                                <a href="{{ url('product/details') }}/{{ $cart_item->product_id }}">{{ Str::limit(App\Models\Product:: find($cart_item->product_id)->title, 12) }}</a>
+                                                <span>QTY : {{ $cart_item->quantity }}</span>
+                                                <p>৳{{ App\Models\Product:: find($cart_item->product_id)->price * $cart_item->quantity }}</p>
+                                                <a href="{{ url('cart/delete') }}/{{ $cart_item->id }}">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                                @php
+                                                    $subtotal = $subtotal + App\Models\Product:: find($cart_item->product_id)->price * $cart_item->quantity;
+                                                @endphp
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                    <li>Subtotol: <span class="pull-right">৳{{ $subtotal }}</span></li>
                                     <li>
-                                        <button>Check Out</button>
+                                        <a href="{{ url('/cart') }}" class="custom_checkout_button">View Cart</a>
                                     </li>
                                 </ul>
                             </li>

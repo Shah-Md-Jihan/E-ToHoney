@@ -620,6 +620,24 @@ header-area start
     margin-top: 25px;
 }
 
+.custom_checkout_button{
+    width: 100%;
+    height: 35px;
+    background: #fff;
+    text-transform: uppercase;
+    border: none;
+    color: #333 !important;
+    margin-top: 25px;
+    text-align: center;
+    padding-top: 6px;
+    font-size: 14px !important;
+}
+
+.custom_checkout_button:hover{
+    background: #ef4836;
+    color: #fff !important;
+}
+
 .cart-wrap li button:hover {
     background: #ef4836;
     color: #fff;
@@ -1302,9 +1320,31 @@ header-area start
     line-height: 35px;
     border-radius: 3px;
 }
+.product-img ul li button {
+    display: block;
+    height: 35px;
+    width: 35px;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 18px;
+    line-height: 35px;
+    border-radius: 3px;
+    background: none;
+}
+.product-img ul li button:hover {
+    background: #ef4836;
+    border-color: #ef4836;
+}
 .product-img ul li a:hover {
     background: #ef4836;
     border-color: #ef4836;
+}
+
+.wishlist_ct_button{
+    color: #333 !important;
+}
+.wishlist_ct_button:hover{
+    color: #fff !important;
 }
 
 .product-content {
@@ -3303,6 +3343,20 @@ ol {
     display: block;
     margin-left: 30px;
 }
+.input-style li button {
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    width: 120px;
+    background: #ef4836;
+    color: #fff;
+    display: block;
+    margin-left: 30px;
+    border: none;
+}
+.input-style li button:hover {
+    background: #333;
+}
 
 .input-style li a:hover {
     background: #333;
@@ -3423,3 +3477,34 @@ ol {
     padding-bottom: 0;
 }
 /*mobal-subscribe*/
+
+
+/*================== CUSTOM CSS ====================*/
+.wish_btn {
+    width: 100%;
+    height: 35px;
+    background: #fff;
+    text-transform: uppercase;
+    border: none;
+    color: #333 !important;
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px !important;
+    padding-top: 6px;
+}
+.wish_btn:hover {
+    background: #ef4836;
+    color: #fff !important;
+}
+
+.stock_out_btn{
+    height: 40px;
+    width: 150px;
+    background: #bbb;
+    display: inline-block;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 40px;
+    border: none;
+    cursor: not-allowed;
+}

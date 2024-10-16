@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductMultiplePhotos;
+use App\Models\Cart;
 
 class FrontendController extends Controller
 {

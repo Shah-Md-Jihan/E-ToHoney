@@ -81,6 +81,18 @@
           <li class="nav-item"><a href="{{ url('add/products') }}" class="nav-link @yield('add_product')">Add Products</a></li>
         </ul>
 
+        <a href="#" class="sl-menu-link @yield('coupon')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Coupon</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ url('add/coupon') }}" class="nav-link @yield('add_coupon')">Add Coupon</a></li>
+          <li class="nav-item"><a href="{{ url('coupons') }}" class="nav-link @yield('coupon_list')">Coupon List</a></li>
+        </ul>
+
         <a href="" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
@@ -294,8 +306,8 @@
 
     <footer class="sl-footer">
         <div class="footer-left">
-          <div class="mg-b-2">Copyright &copy; 2017. Starlight. All Rights Reserved.</div>
-          <div>Made by ThemePixels.</div>
+          <div class="mg-b-2">Copyright &copy; {{ date("Y")  }}. ToHoney. All Rights Reserved.</div>
+          <div>Made by ToHoney.</div>
         </div>
         <div class="footer-right d-flex align-items-center">
           <span class="tx-uppercase mg-r-10">Share:</span>

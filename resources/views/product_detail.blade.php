@@ -64,10 +64,14 @@
                         </div>
                         {{-- <p>description</p> --}}
                         <ul class="input-style">
-                            <li class="quantity cart-plus-minus">
-                                <input type="text" value="1" />
-                            </li>
-                            <li><a href="cart.html">Add to Cart</a></li>
+                            <form action="{{ url('add/to/cart') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product_info->id }}">
+                                <li class="quantity cart-plus-minus">
+                                    <input type="text" name="quantity" value="1" />
+                                </li>
+                                <li><button type="submit">Add to Cart</button></li>
+                            </form>
                         </ul>
                         <ul class="cetagory">
                             <li>Categories:</li>
