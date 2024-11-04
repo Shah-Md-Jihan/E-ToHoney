@@ -45,6 +45,7 @@ Route::get('/shop', [ShopController::class, 'shop']);
 
 // CartController Routes
 Route::get('/cart', [CartController::class, 'viewcart']);
+Route::get('/cart/{coupn_name}', [CartController::class, 'viewcart']);
 Route::post('add/to/cart', [CartController::class, 'addtocart']);
 Route::get('cart/delete/{cart_id}', [CartController::class, 'cartdelete']);
 Route::post('cart/update', [CartController::class, 'cartupdate']);

@@ -401,6 +401,19 @@
     <script src="{{ asset('frontend_assets/js/jquery-ui.min.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('frontend_assets/js/scripts.js') }}"></script>
+
+
+
+    <script>
+        $(document).ready(function(){
+            $('#apply_coupon_btn').click(function(){
+                var coupon_text = $('#coupon_text').val();
+                var link_to_go = "{{ url('cart') }}/"+coupon_text;
+                window.location.href = link_to_go;
+            });
+        });
+    </script>
+
 </body>
 
 

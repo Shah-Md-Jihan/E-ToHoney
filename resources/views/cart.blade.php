@@ -83,9 +83,16 @@
                                 </ul>
                                 <h3>Cupon</h3>
                                 <p>Enter Your Cupon Code if You Have One</p>
-                                <div class="cupon-wrap">
-                                    <input type="text" placeholder="Cupon Code">
-                                    <button>Apply Cupon</button>
+                                <div>
+                                    <input type="text" id="coupon_text" placeholder="Cupon Code" value="{{ $coupon_name ?? "" }}">
+                                    <a href="#" class="btn btn-danger" id="apply_coupon_btn">Apply Cupon</a>
+                                    @if (session('coupon_expired_alert'))
+                                        <p class="text-danger">{{ session('coupon_expired_alert')}}</p>
+                                    @endif
+                                    @if (session('coupon_invalid_error'))
+                                        <p class="text-danger">{{ session('coupon_invalid_error')}}</p>
+                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>
@@ -94,7 +101,14 @@
                                 <h3>Cart Totals</h3>
                                 <ul>
                                     <li><span class="pull-left">Subtotal </span>৳{{ $cart_subtotal }}</li>
-                                    <li><span class="pull-left"> Total </span> $380.00</li>
+                                    @isset($discount_amount_from_db)
+                                        <li><span class="pull-left">Discount </span>- ৳{{ ($cart_subtotal * $discount_amount_from_db)/100 }}</li>
+                                    @endisset
+                                    @isset($discount_amount_from_db)
+                                        <li><span class="pull-left"> Total </span> {{ $cart_subtotal - ($cart_subtotal * $discount_amount_from_db)/100 }}</li>
+                                    @else
+                                        <li><span class="pull-left"> Total </span> ৳{{ $cart_subtotal }}</li>
+                                    @endisset
                                 </ul>
                                 <a href="checkout.html">Proceed to Checkout</a>
                             </div>
